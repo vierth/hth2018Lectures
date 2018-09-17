@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="d3.min.js"></script>
+</head>
+<body>
+<script>
+
+var data = [{doc:"Doc 1",之:2,的:4},{doc:"Doc 1",之:6,的:1},{doc:"Doc 1",之:7,的:3},{doc:"Doc 1",之:2,的:6},{doc:"Doc 1",之:3,的:5}]
+
+var width = window.innerWidth - window.innerWidth*.05;
+var height = window.innerHeight - window.innerHeight*.05;
+
+var x = d3.scaleLinear().range([0,width]);
+var y = d3.scaleLinear().range([height,0]);
+
+var xAxis = d3.axisBottom(x);
+var yAxis = d3.axisLeft(y);
+
+x.domain(d3.extent(data, function(d) { return d["之"];})).nice();
+y.domain(d3.extent(data, function(d) { return d["的"];})).nice();
+
+var chartarea = d3.select("body").append("svg");
+
+var gX = svg.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+var gY = svg.append("g")
+    .attr("class", "axis axis--y")
+    .call(yAxis);
+
+var graphTitle = svg.append("text")
+    .attr("x", 0)
+    .attr("y", height/10*9)
+    .attr("font-size",32)
+    .text("之 vs. 的")
+
+var xLabel = svg.append("text")
+    .attr("x",0)
+    .attr("y",height - height/10)
+    .attr("font-size",18)
+    .attr("text-anchor","middle")
+    .text("之");
+  
+var yLabel = svg.append("text")
+    .attr("x",0-40)
+    .attr("y",height/2)
+    .attr("font-size",18)
+    .attr("text-anchor","middle")
+    .attr("transform", "rotate(-90,-40,"+height/2+")")
+    .text("的");
+
+</script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>September 24</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            .container{
+                display: flex;
+            }
+            .col{
+                flex: 1;
+            }
+            .command{
+                font-family: monospace;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section><h1>Hacking the Humanities</h1>
+                <h2>September 24th</h2>
+                </section>
+                <section>
+                <h2>Algorithmic Criticism, Macroanalysis</h2>
+                <h2>Math, Lists, Booleans, Loops</h2>
+                </section>
+                <section><h1>Algorithmic Criticism</h1>
+                <aside class='notes'>This is where most of this class will be focused</aside>
+                </section>
+                <section><h1>Macroanalysis</h1></section>
+                <section><h1>Something is Missing</h1>
+                <h2>"Distant Reading"</h2>
+                <aside class='notes'>Moretti, #metoo, and how we deal with abuse</aside>
+                </section>
+                <section><h1>Addition</h1>
+                    <code>+</code>
+                    <pre><code class="python">
+10 + 10
+10 + 10.0                      
+                    </code></pre>    
+                </section>
+                <section>
+                    <h2>Subtraction</h2>
+                    <code>-</code>
+                    <pre><code class="python">
+10 - 5
+5.3 - 42                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Multiplication</h2>
+                    <code>*</code>
+                    <pre><code class="python">
+10 * 3                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Division</h2>
+                    <code>/</code>
+                    <pre><code class="python">
+10/3                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Integer Division</h2>
+                    <code>//</code>
+                    <pre><code class="python">
+10//3                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Remainder (Modulo)</h2>
+                    <code>%</code>
+                    <pre><code class="python">
+10%3                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Exponential</h2>
+                    <code>**</code>
+                    <pre><code class="python">
+3 ** 2                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>String Math</h2>
+                    <pre><code class="python">
+"yo" * 4
+"3" * 8                      
+                    </code></pre>
+                    <aside class='notes'>Obviously, you cant subtract or divide</aside>
+                </section>
+                <section>
+                    <h2>Checking Type</h2>
+                    <pre><code class="python">
+myNum = "3"
+type(myNum)                       
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Casting Type</h2>
+                    <pre><code class="python">
+myNum = "3"
+int(myNum)
+float(myNum)
+str(42)                       
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Lists</h2>
+                    <pre><code class="python">
+[1, 2, 3, 4, 5]
+["this", "that", "though"]
+["four", 4, "vier", "四"]
+[[1,2], [3,4], [5,6]]
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Lists</h2>
+                    <pre><code class="python">
+myList = [] # empty list
+myList = list() # also empty
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>List Indexing</h2>
+                    <pre><code class="python">
+myList = [1, 2, 3, 4] 
+
+myList[0] # first item
+
+myList[-1] # last item
+
+myList[:-1] # all but last item
+                    </code></pre>
+                <aside class="notes">Same as string indexes!</aside>
+                </section>
+                <section>
+                    <h2>Lists: Locate item</h2>
+                    <pre><code class="python">
+myList = ["car", "truck", "boat", "plane"]
+
+myList.index("boat") # instead of find
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Changing Lists (Mutable)</h2>
+                    <pre><code class="python">
+intList = [1, 2, 3, 4, 5]
+
+intList[3] = 8 # change item at index 3
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>append()</code></h2>
+                    <pre><code class="python">
+intList = [1, 2, 3, 4, 5]
+
+intList.append(1) # add 1 to end of list
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>pop()</code></h2>
+                    <pre><code class="python">
+intList = [1, 2, 3, 4, 5]
+
+intList.pop() # remove last item
+
+intList.pop(1) # remove item at index 1
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>insert()</code></h2>
+                    <pre><code class="python">
+intList = [1, 2, 3, 4, 5]
+
+intList.insert(1,42) # insert 42 at index 1
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>String to List</h2>
+                    <pre><code class="python">
+myString = "Hello!"
+
+listFromString = list(myString)                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>split() join()</code></h2>
+                    <pre><code class="python">
+myString = "Hello! How are you?"
+
+listFromString = myString.split(" ")
+
+stringFromList = " ".join(listFromString)                    
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Useful Functions</h2>
+                    <pre><code class="python">
+intList = [1, 2, 5, 3, 4]
+
+len(intList) # Number of Items in List
+min(intList) # minimum value
+max(intList) # maximum value                  
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Useful Methods</h2>
+                    <pre><code class="python">
+intList = [1, 2, 5, 3, 4]
+
+intList.reverse() # reverse list (in place)
+intList.sort() # sort list (in place)
+intList.sort(reverse=True) # reverse sort  
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Boolean Operators</h1>
+                </section>
+                <section>
+                    <h2>Equals</h2>
+                    <code>==</code>
+                    <pre><code class="python">
+5 == 5 # True
+5 == 6 # False
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Does not Equal</h2>
+                    <code>!=</code>
+                    <pre><code class="python">
+5 != 5 # False
+5 != 6 # True
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Less than</h2>
+                    <code><</code>
+                    <pre><code class="python">
+5 < 5 # False
+5 < 6 # True
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Less than or Equal to</h2>
+                    <code><=</code>
+                    <pre><code class="python">
+5 <= 5 # True
+5 <= 6 # True
+                    </code></pre>
+                </section>
+                <section>
+                    
+                    <h2>Greater Than</h2>
+                    <code>></code>
+                    <h2>Greater Than or Equal to</h2>
+                    <code>>=</code>
+                </section>
+                <section>
+                    <h2>Equals (strings)</h2>
+                    <pre><code class="python">
+"a" == "a" # You can use this for strings                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Equals (lists)</h2>
+                    <pre><code class="python">
+a = ["hello"]
+b = ["hello"]
+a is b # False
+a == b # True                      
+c = b
+c is b # True
+                    </code></pre>
+                <aside class="notes">This is because lists are mutable, not the same object</aside>
+                </section>
+                <section>
+                    <h2><code>if</code></h2>
+                    <pre><code class="python">
+if 10 < 20:
+    print("Exactly!")                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>if</code></h2>
+                    <pre><code class="python">
+if 10 > 20:
+    print("Crazy!")  
+
+print("made it")                      
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>if/else</code></h2>
+                    <pre><code class="python">
+if 30 < 20:
+    print("Crazy!")  
+else:    
+    print("30 is NOT less than 20")                      
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>if/elif/else</code></h2>
+                    <pre><code class="python">
+if 10 > 10:
+    a = "10 is larger than 10"
+elif 10 == 10:
+    a = "10 is equal to 10"
+elif 10 < 10:
+    a = "10 is smaller than 10"
+else:
+    a = "everything is meaningless"
+print(a)                     
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Hark! A Bug!</h2>
+                    <pre><code class="python">
+a = 10
+if a > 1:
+    b = "a is closest to 1"
+elif a > 5:
+    b = "a is closest to 5"
+elif a > 8:
+    b = "a is closest to 8"
+else:
+    b = "not sure what you are looking for"
+print(b)                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>and</code></h2>
+                    <pre><code class="python">
+i = 6
+if i <10 and i >5:
+    print("i is between ten and 5")
+                    </code></pre>
+                <aside class="notes">i must meet BOTH criteria</aside>
+                </section>
+                <section>
+                    <h2><code>or</code></h2>
+                    <pre><code class="python">
+i = 15
+if i < 5 or i > 10:
+    print("i is less than 5 or greater than 10")
+                    </code></pre>
+                <aside class="notes">i must meet at least one criteria</aside>
+                </section>
+                <section>
+                    <pre><code class="python">
+if (i > 5 and i < 10) or i > 100:
+    print("i fits the criteria")
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>in/not</code></h2>
+                    <pre><code class="python">
+if "run" in "I run the team.":
+    print("run found in the string")
+
+if "yum" not in "I run the team.":
+    print("yum not found")
+
+pod = False
+if not pod:
+    print("pod was false")
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Loops</h1>
+                </section>
+                <section>
+                    <h2><code>while</code></h2>
+                    <pre><code class="python">
+i = 0
+while i < 10:
+    print(f"{i} is not yet 10.")
+    i = i + 1
+                    </code></pre>
+                    <aside class="notes">The humble while loop</aside>
+                </section>
+                <section>
+                    <h2><code>while</code></h2>
+                    <pre><code class="python">
+i = 0
+while i < 10:
+    print(f"{i} is not yet 10.")
+    i += 1 # shorthand
+                    </code></pre>
+                    <aside class="notes">shorthand</aside>
+                </section>
+                <section>
+                    <h2><code>infinite fail</code></h2>
+                    <pre><code class="python">
+i = 0
+while i < 10:
+    print(f"{i} is not yet 10.")
+                    </code></pre>
+                    <aside class="notes">infinite loop</aside>
+                </section>
+                <section>
+                    <h2><code>for</code></h2>
+                    <pre><code class="python">
+for i in range(10):
+    print(f"1: {i} is not yet 10")
+                    </code></pre>
+                    <aside class="notes">for</aside>
+                </section>
+                <section>
+                    <h2><code>for</code></h2>
+                    <pre><code class="python">
+for i in range(2, 10):
+    print(f"2: {i} is not yet 10")
+                    </code></pre>
+                    <aside class="notes">start at 2</aside>
+                </section>
+                <section>
+                    <h2><code>for</code></h2>
+                    <pre><code class="python">
+for i in range(10):
+    print(f"3: {i} is not yet 10")
+    i += 10
+    print(f"added 10 and now have {i}")
+                    </code></pre>
+                    <aside class="notes">changing i does not change i for loop logic</aside>
+                </section>
+                <section>
+                    <h2><code>for</code></h2>
+                    <pre><code class="python">
+myList = ["a","b","c","d","e"]
+
+for item in myList:
+    print(item)
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>for</code></h2>
+                    <pre><code class="python">
+myString = "chugalug"
+for char in myString:
+    print(char)
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>nested loop</h2>
+                    <pre><code class="python">
+for item in myList:
+    if item == "c":
+        print(item)
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Excersize</h1>
+                    <p>Create a list with at least 10 elements</p>
+                    <p>Create an empty list</p>
+                    <p>Iterate through list with elements</p>
+                    <p>Create a test, if the item passes</p>
+                    <p>Append the item to empty list</p>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

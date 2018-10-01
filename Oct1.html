@@ -1,0 +1,455 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>October 1</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            .container{
+                display: flex;
+            }
+            .col{
+                flex: 1;
+            }
+            .command{
+                font-family: monospace;
+            }
+            .reveal pre {
+                font-size: 0.74em;
+                font-family: monospace;
+                line-height: 1.45em;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section><h1>Hacking the Humanities</h1>
+                <h2>October 1st</h2>
+                </section>
+                
+                <section>
+                <h2>History of Humanities Computing</h2>
+                <h2>Files, Dictionaries, Libraries</h2>
+                </section>
+                <section><h2>Mosteller and Wallace</h2></section>
+                <section><h2>TEI</h2></section>
+                <section><h1>Let's start coding</h1></section>
+                <section><h2>Files</h2>
+                    <p>Writing to File</p>
+                    <pre><code class="python">
+writefile = open("newfile.txt","w",encoding="utf8")
+writefile.write("Writing to file!")
+writefile.close()                     
+                    </code></pre>    
+                </section>
+                <section>
+                    <h2>Context Manager</h2>
+                    <pre style="font-size: .6em;"><code class="python">
+with open("newfile.txt", "w", encoding = "utf8") as writefile:
+    writefile.write("Writing to file!")                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Reading a File</h2>
+                    <pre><code class="python">
+readfile = open("newfile.txt","r",encoding="utf8")
+
+contents = readfile.read()
+
+readfile.close()
+
+print(contents)                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Append to File</h2>
+                    <code>/</code>
+                    <pre><code class="python">
+afile = open("newfile.txt","a",encoding="utf8")
+afile.write("Writing more to file!")
+afile.close()                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Dictionaries</h2>
+                    <code>dict()</code>
+                    <pre><code class="python">
+myDictionary = {}
+myDictionary = dict()                        
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code class="python">
+ages = {"Paul":34, "Padma":25, "Gorp":155}   
+
+print(ages)
+                    </code></pre>
+                <aside class="notes">Python will not remember the order</aside>
+                </section>
+                <section>
+                    <h2>Keys</h2>
+                    
+                    <pre><code class="python">
+gorpAge = ages["Gorp"]
+print(gorpAge)                       
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Adding Data</h2>
+                    <pre><code class="python">
+ages["Blobl"] = 20
+print(ages)                     
+                    </code></pre>
+                    <aside class='notes'>Obviously, you cant subtract or divide</aside>
+                </section>
+                <section>
+                    <h2>Key Error</h2>
+                    <pre><code class="python">
+shannonAge = ages["Shannon"]                       
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Getting the Keys</h2>
+                    <pre><code class="python">
+ages = {"Paul":34, "Padma":25, "Gorp":155}
+print(ages.keys())                       
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Iterating</h2>
+                    <pre><code class="python">
+# Just the keys
+for key in ages.keys():
+    print(key, ages[key])
+
+# Just the values
+for value in ages.values():
+    print(f"value: {value}")
+
+# Both the keys and the values
+for key, value in ages.items():
+    print(key, value)
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Most Common Character</h2>
+                </section>
+                <section>
+                    <h2>Syntax Error</h2>
+                    <pre><code class="python">
+for i in range(20)
+    print(i)
+
+b = "This is a string
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Index Error</h2>
+                    <pre><code class="python">
+myList = [1,2,3,4,5,6]
+
+print(myList[200])
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>KeyError</h2>
+                    <pre><code class="python">
+myDict = {"Paul":10, "Shannon": 11}
+
+print(myDict["Roger"])
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>ZeroDivisionError</h2>
+                    <pre><code class="python">
+5/0
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Try and Except</h2>
+                    <pre><code class="python">
+myDict = {"Paul":10, "Shannon": 11}
+
+try:
+    person = myDict["Peter"]
+except KeyError:
+    print("Person not in dictionary")
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Writing Functions</h2>
+                    <pre><code class="python">
+def paulsFunction():
+    print("Hello! Nice function!")
+
+paulsFunction()
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>With Input</h2>
+                    <pre><code class="python">
+def whoseFunction(name):
+    print(f"Hi, {name}! Nice function!")
+
+whoseFunction("Paul")
+whoseFunction("Pim")                       
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Multiple Input</h2>
+                    <pre><code class="python">
+def whoseFunction(yourname, myname):
+    print(f"Hi, {yourname}! My name is {myname}!")
+
+# Now give the function both inputs
+whoseFunction("Paul", "Pim")                  
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>With Output</h2>
+                    <pre><code class="python">
+def add(num1, num2):
+    result = num1 + num2
+    return result                 
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Libraries</h2>
+                    <pre><code class="python">
+import math
+
+import json, re
+
+from matplotlib import pyplot
+
+from matplotlib.pyplot import pl
+
+import matplotlib.pyplot as plt
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>NLTK</h1>
+                </section>
+                <section>
+                    <pre><code class="python">
+import nltk
+nltk.download() # only once
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Prep work (open file)</h2>
+                    <pre><code class="python">
+textfile = open("holmes.txt","r",encoding="utf8")
+holmesstring = textfile.read() 
+textfile.close()
+print(holmesstring[:100])
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Remove Boilerplate</h2>
+                    <code><</code>
+                    <pre style="font-size: .62em;"><code class="python">
+startpoint = holmesstring.find('*** START OF THIS PROJECT')
+
+endpoint = holmesstring.find('*** END OF THIS PROJECT')
+
+holmesstring = holmesstring[startpoint:endpoint]
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Tokenizing</h2>
+                    <code><=</code>
+                    <pre><code class="python">
+# Sentence tokenization:
+sentences = nltk.sent_tokenize(holmesstring)
+print(sentences[1000:1010])
+
+# Word tokenization
+words = nltk.word_tokenize(holmesstring)
+print(words[1000:1010])
+                    </code></pre>
+                </section>
+                <section>
+                    
+                    <h2>Words and Sents</h2>
+                    <pre style="font-size: .68em;"><code class="python">
+# first create a dummy list to contain results
+sentencesWordsTokens = []
+
+# First break into sentences:
+sentences = nltk.sent_tokenize(holmesstring)
+
+# Then break each sentence into words:
+for sentence in sentences:
+    tokenizedSentence = nltk.word_tokenize(sentence)
+    sentencesWordsTokens.append(tokenizedSentence)
+
+print(sentencesWordsTokens[1000])
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>All in one line!</h2>
+                    <pre style="font-size: .45em;"><code class="python">
+s = [nltk.word_tokenize(sentence) for sentence in nltk.sent_tokenize(holmesstring)]
+
+print(s[1000])                      
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Text Object</h2>
+                    <pre><code class="python">
+words = nltk.word_tokenize(holmesstring)
+
+holmestext = nltk.Text(words)
+                    </code></pre>
+                <aside class="notes">This comes with many useful features!</aside>
+                </section>
+                <section>
+                    <h2>Concordance</h2>
+                    <pre><code class="python">
+holmestext.concordance("Holmes")                      
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Similar words</h2>
+                    <pre><code class="python">
+holmestext.similar("apartment")                      
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Dispersion Plot</h2>
+                    <pre><code class="python">
+holmestext.dispersion_plot(["murder", "death"])                     
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>Collocations</code></h2>
+                    <pre><code class="python">
+holmestext.collocations()                    
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Frequencies</h2>
+                    <pre><code class="python">
+frequencies = nltk.FreqDist(holmestext)
+print(frequencies['and'])                      
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>Most Common/Hapaxes</code></h2>
+                    <pre><code class="python">
+print(frequencies.most_common(1))
+
+print(frequencies.hapaxes())
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Clean up words list</h2>
+                    <pre><code class="python">
+filteredWords = []
+for word in words:
+    if word.isalnum():
+        filteredWords.append(word.lower())
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Document Length</h2>
+                    <pre><code class="python">
+length = len(filteredWords)
+
+print(f"This contains {length} words.")
+                    </code></pre>
+                </section>
+                <section>
+                    <h2><code>Unique words</code></h2>
+                    <pre style='font-size: .7em;'><code class="python">
+uniqueWords = set(filteredWords)
+
+uniqueWordLength = len(uniqueWords)
+
+print(f"It contains {uniqueWordLength} unique words.")
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Lexical Diversity</h1>
+                    <pre style='font-size: .7em;'><code class="notes">
+lexicalDiversity = uniqueWordLength/length
+print(f"It's lexical diversity is {lexicalDiversity}")
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Stemming</h2>
+                    <pre style='font-size: .57em;'><code class="python">
+filteredWords = [word.lower() for word in words if word.isalnum()]
+
+stemmer = SnowballStemmer("english")
+
+stemmedWords = []
+for word in filteredWords:
+    stemmedWords.append(stemmer.stem(word))
+
+print(stemmedWords[:25])
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Lemmatize</h2>
+                    <pre style='font-size: .57em;'><code class="python">
+lemmafinder = nltk.WordNetLemmatizer()
+lemmas = [lemmafinder.lemmatize(word) for word in filteredWords]
+print(lemmas[:25])
+                    </code></pre>
+                </section>
+                
+                <section>
+                    <h1>Assignment 1</h1>
+                    <h2>Due before class on October 8</h2>
+                    <p>Find a text (Project Gutenburg is a good choice)</p>
+                    <p>Tokenize and create an NLTK Text Object</p>
+                    <p>Make a lexical dispersion plot</p>
+                </section>
+                <section>
+                    <h1>Assignment 1 (cont)</h1>
+                    <p>Lemmatize the text and then calculate lexical diversity</p>
+                    <p>Write a short reflection paragraph (150-200 words) on what these measures tell you about your text</p>
+                    <p>Submit text, code, and essay on Blackboard.</p>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                transition:'fade',
+				transitionSpeed: 'fast',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -1,5 +1,6 @@
 # Hacking the Humanities Lecture Slides
 I will be uploading the lectures from my Hacking the Humanities class here. This way students and interested parties can access them easily.
+
 [October 1 Lecture](https://vierth.github.io/hth2018Lectures/Oct1)
 
 [September 24 Lecture](https://vierth.github.io/hth2018Lectures/Sept24)

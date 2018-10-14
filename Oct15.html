@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>October 1</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            .container{
+                display: flex;
+            }
+            .col{
+                flex: 1;
+            }
+            .command{
+                font-family: monospace;
+            }
+            .reveal pre {
+                font-size: 0.74em;
+                font-family: monospace;
+                line-height: 1.45em;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section><h1>Hacking the Humanities</h1>
+                <h2>October 15th</h2>
+                </section>
+                
+                <section>
+                <h2>Git/GitHub</h2>
+                <p>Based on GitHub's cheatsheet</p>
+                </section>
+                <section><h2>Distributed Version Control</h2></section>
+                <section><h2>Git</h2></section>
+                <section><h2>A way of keeping track of your work</h2></section>
+                <section><h2>Lets multiple people work on the same thing</h2></section>
+                <section><h2>Using Git</h2></section>
+                <section><h2>Keywords you need to know</h2></section>
+                <section><h2>Setting up Github (do once)</h2>
+                <code>git config --global user.name "yourusername"</code></section>
+                <section><h2>Setting up Github (do once)</h2><code>git config --global user.email "emailaddress"</code></section>
+                <section><h2>Initialize a repository in current folder</h2>
+                <code>git init</code></section>
+                <section><h2>Initilize repository and create folder</h2><code>git init [repositoryname]</code></section>
+                <section><h2>adding a file</h2>
+                <code>git add [file name]</code></section>
+                <section><h2>adding all files</h2>
+                <code>git add *</code></section>
+                <section><h2>Record version</h2>
+                <code>git commit -m "description of changes"</code></section>
+                <section><h2>Using branches</h2>
+                <p>Make changes without affecting main branch</p>
+                <p class="fragment">Lets you make a new version!</p></section>
+                <section><h2>Branches</h2><p>Default branch is "Master" branch</p></section>
+                <section><h2>View all branches</h2><code>git branch</code></section>
+                <section><h2>Create new branch</h2><code>git branch [branchname]</code></section>
+                <section><h2>Go to Branch</h2><code>git checkout [branchname]</code></section>
+                <section><h2>Make all your changes in this branch</h2></section>
+                <section><h2>Once you are satistified, switch back to main branch</h2></section>
+                <section><h2>Merge changes to current branch</h2><code>git merge [branchname]</code></section>
+                <section><h2>Delete branch</h2><code>git branch -d [branchname]</code></section>
+                <section><h2>Removing a file</h2><code>git rm [filename]</code></section>
+                <section><h2>Pushing changes to GitHub</h2><p>"push" up</p><code>git push</code></section>
+                <section><h2>Get changes from GitHub</h2><code>git pull</code></section>
+                <section><h2>Download then change</h2><code>git fetch</code><code>git merge</code></section>
+                <section><h2>Clone repository</h2><code>git clone [url]</code></section>
+                <section><h2>Ignoring things</h2><p>.gitignore</p></section>
+                <section><h2>You'll mostly use</h2>
+                <code>git add *</code>
+                <code>git commit -m "my message"</code></section>
+                <section><h2>Set up GitHub account</h2><p>www.github.com</p></section>
+                <section><h2>Push Requests</h2></section>
+                <section><h2>Git Issues</h2></section>
+                <section><h2>GitHub Pages</h2></section>
+                <section></section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                transition:'fade',
+				transitionSpeed: 'fast',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

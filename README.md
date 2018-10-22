@@ -3,7 +3,7 @@ I will be uploading the lectures from my Hacking the Humanities class here. This
 
 [October 15 Lecture](https://vierth.github.io/hth2018Lectures/Oct15)
 
-[October 8 Lecture](mskroon.github.io/hth_regex_081018.pdf) by Martin Kroon
+[October 8 Lecture](https://mskroon.github.io/hth_regex_081018.pdf) by Martin Kroon
 
 [October 1 Lecture](https://vierth.github.io/hth2018Lectures/Oct1)
 

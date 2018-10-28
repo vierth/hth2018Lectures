@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>October 29</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            .container{
+                display: flex;
+            }
+            .col{
+                flex: 1;
+            }
+            .command{
+                font-family: monospace;
+            }
+            .reveal pre {
+                font-size: 0.74em;
+                font-family: monospace;
+                line-height: 1.45em;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section><h1>Hacking the Humanities</h1>
+                <h2>October 29th</h2>
+                </section>
+                
+                <section>
+                <h2>Pandas and Structured Data Analysis</h2>
+                <p>http://pandas-docs.github.io/pandas-docs-travis/10min.html</p>
+                </section>
+                <section><h2>Last Time</h2>
+                <p>Slides are up! Reschedule?</p></section>
+                <section><h2>Big? Smart? Clean? Messy? Data in the Humanities</h2></section>
+                <section><h2>Pandas</h2></section>
+                <section><h2>Think of it as supercharged Excel</h2></section>
+                <section><h2>Based on R</h2></section>
+                <section><h2>"Vectorized Computations"</h2></section>
+                <section><code>import pandas as pd</code></section>
+                <section><h2>One Dimensional Data</h2>
+                <code>from pandas import Series</code>
+                <aside class="notes">Think of this like a column in a spreadsheet</aside></section>
+                <section><h2>Like lists!</h2><pre><code class="python">
+numberList = [1, 2, 3, 4, 5, 6, 7, 8]
+mySeries = Series(numberList)
+print(mySeries)                    
+                </code></pre></section>
+                <section><pre><code class="python">
+mySeries.value_counts()                    
+                </code></pre></section>
+                <section><h2>Faster Word Counts</h2><pre><code class="python">
+import nltk
+holmesstring = textfile.read() 
+textfile.close()
+words = nltk.word_tokenize(holmesstring)
+
+wordSeries = Series(words)
+wordCounts = wordSeries.value_counts()
+                </code></pre></section>
+                <section><h2>Quick editing!</h2><pre><code class="python">
+lowerSeries = wordSeries.str.lower()
+wordCounts = lowerSeries.value_counts()                   
+                </code></pre></section>
+                <section><h2>Series Indices</h2><pre><code class="python">
+# Unlike lists, indexes for series can be words
+# (and numbers). Unlike dictionaries, 
+# series are ordered
+print(wordCounts.index)                    
+                </code></pre></section>
+                <section><h2>Using index by word</h2><pre><code class="python">
+# You can get data by index name:
+holmesNum = wordCounts["holmes"]
+print(f"holmes occurs {holmesNum} times.")                    
+                </code></pre></section>
+                <section><h2>Using index by number</h2><pre><code class="python">
+# You can also get it by index number:
+theNum = wordCounts[0]
+print(f"The most common word occurs {theNum} times")                   
+                </code></pre></section>
+                <section><h2>Get</h2><pre><code class="python">
+# this returns None if the value doesn't exist                    
+wordCounts.get("chimp")                   
+                </code></pre></section>
+                <section><h2>Manipulations</h2><pre><code class="python">
+wordCounts*2 # double everything
+
+wordCounts + wordCounts # add series together
+
+wordCounts - wordCounts # subtract series           
+                </code></pre></section>
+                <section><h2>DataFrame</h2><pre><code class="python">
+from pandas import DataFrame         
+                </code></pre></section>
+                <section><h2>Create DataFrame</h2><pre><code class="python" style='font-size: .95em;'>
+df = DataFrame(np.random.randn(10, 5), 
+                columns = ["A", "B", "C", "D", "E"])         
+                </code></pre></section>
+                <section><pre><code class="python">
+# You'll notice that each column is 
+# essentially a Series:
+print("Here is a column from the DataFrame:")
+print(df["A"])                    
+                </code></pre></section>
+                <section><h2>DataFrames and Spreadsheets</h2>
+                <pre><code class="python">
+# Public Domain data from:
+# https://www.ncdc.noaa.gov/cdo-web/
+
+df = pd.read_csv('weather.csv', sep=",")   
+                </code></pre>
+                </section>
+                <section><h2>DataFrame Info</h2><pre class="python"><code>
+df.index
+
+df.columns
+
+df.head()
+                </code>
+                </pre></section>
+                <section><h2>Basic Stats</h2><pre><code class="python">
+df.describe()                 
+                </code></pre></section>
+                <section><h2>Missing Data</h2>
+                <pre><code class="python">
+df.dropna() # drop row (save to df to keep)
+
+df.dropna(axis=1) # drop columns  
+
+# drop column if all missing
+df.dropna(axis=1, how="all") 
+                </code></pre>
+                </section>
+                <section><h2>More info</h2><pre><code class='python'>
+df.max() # maximum value in column
+
+df.min() # minimum value in column
+
+df.mean() # mean of each column
+                </code></pre></section>
+                <section><h2>Getting rows</h2><pre><code class='python'>
+df[0:1] # df[0] will not work
+
+df[0:5] # first five rows
+
+# first 10 unique values in NAME column
+df['NAME'].unique()[:10] 
+                </code></pre></section>
+                <section><h2>Cleaning a bit</h2><pre><code class='python'>
+# Drop rows with no temperature data
+df = df[df["TMAX"].notnull()] # isnull() also exists
+df = df[df["TMIN"].notnull()]                    
+                </code></pre></section>
+                <section><h2>Boolean Manipulations</h2><pre><code class="python">
+# Get all observations where temperature is above 28
+hot = df[df["TMAX"] > 28]
+
+# Get Rotterdam info!
+rot = df[df.NAME == "ROTTERDAM, NL"] 
+
+# df[df["NAME"] == "ROTTERDAM, NL"] does the same thing
+
+print(rot.describe()) 
+                </code></pre></section>
+                <section><h2>Getting Average Temp</h2>
+                <pre><code class='python'>
+# Fancy!
+df["TAVG"] = df[['TMAX','TMIN']].mean(1)                    
+                </code></pre>
+                </section>
+                <section><h2>Date Time info</h2><pre><code class="python">
+df["DATE"] = pd.to_datetime(df["DATE"])                    
+                </code></pre></section>
+                <section><h2>Plotting Info</h2><pre><code class='python'>
+# matplotlib will come back in viz!
+import matplotlib.pyplot as plt
+
+rot = df[df.NAME == "ROTTERDAM, NL"]
+rot = rot.set_index("DATE")
+rot["TMAX"].plot()
+plt.show()                    
+                </code></pre></section>
+                <section><h2>Let's apply this to a Humanities Problem</h2></section>
+                <section><h2>Studying Multiple Texts</h2><pre><code class='python'>
+import re, os
+rf = open("holmes.txt","r",encoding="utf8")
+text = rf.read()
+rf.close()
+text = text[:text.rfind('End of Project Gutenberg')]                    
+                </code></pre></section>
+                <section><h2>Break Text Up</h2>
+                <pre><code class='python' style='font-size: .95em;'>
+# Get stories and titles 
+# (every other item is title)         
+tdiv = re.compile(r"ADVENTURE [IVX]+\. ([A-Z\-' ]+)")          
+shortStories = tdiv.split(text)
+
+# delete empty first item
+shortStories = shortStories[1:]
+                </code></pre>
+                </section>
+                <section><pre><code class="python">
+if not os.path.isdir("corpus"):
+    os.mkdir("corpus")                    
+                </code></pre></section>
+                <section><pre><code class="python" style='font-size: .95em;'>                    
+for i in range(0,len(shortStories)-1):    
+    # Even items are titles, odd are stories:
+    if i % 2 == 0:
+        filename = shortStories[i]+".txt"
+        story = shortStories[i+1]
+        # os.path.join works on all systems, windows,
+        # mac, and linux!
+        wf = open(os.path.join("corpus",filename),"w")
+        wf.write(story)
+        wf.close()
+                </code></pre></section>
+                <section><h2>Get Info</h2>
+                <pre><code class="python" style='font-size: .95em;'>
+# Let's create an object to contain the corpus:
+sherlockTexts = {}
+for root, dirs, files in os.walk("corpus"):
+    for filename in files:
+        with open(os.path.join(root,filename)) as rf:
+            title = filename[:-4] # Remove the file extension
+            title = title.lower() # lower case for readability
+            shortStory = rf.read()
+            sherlockTexts[title] = shortStory
+                </code></pre></section>
+                <section><h2>Sanity Check</h2>
+                <pre><code class='python'>
+for key, value in sherlockTexts.items():
+    print(f"Successfully loaded {key}, which is {len(value)} characters long.")                    
+                </code></pre>
+                </section>
+                <section><h2>Some preliminary info</h2><pre><code class='python' style='font-size: .6em;'>
+# Titles of the short stories. Unneeded, but makes consistent
+titles  = ['A Scandal in Bohemia','A Case of Identity','The Boscombe Valley Mystery',
+           'The Five Orange Pips','The Man with the Twisted Lip','The Adventure of the Blue Carbuncle',
+           'The Adventure of the Speckled Band',"The Adventure of the Engineer's Thumb",
+           'The Adventure of the Noble Bachelor','The Adventure of the Beryl Coronet',
+           'The Adventure of the Copper Beeches']
+
+# Make them lowercase to match the sherlock dictionary
+titles = [title.lower() for title in titles]                    
+                </code></pre></section>
+                <section><h2>Word Counts</h2><pre><code class='python' style='font-size: .7em;'>
+shortStoryCounts = []
+for i, title in enumerate(titles):
+    shortStory = sherlockTexts[title]
+    tokenizedStory = nltk.word_tokenize(shortStory) # Tokenize into words
+    tokenizedStory = [word for word in tokenizedStory if word.isalnum()]
+    tokenSeries = Series(tokenizedStory) # Turn into a series
+    # Get word counts
+    shortStoryCounts.append(tokenSeries.value_counts())                    
+                </code></pre></section>
+                <section><h2>Term Document Matrix</h2><pre><code class='python' style='font-size: .95em;'>
+df = pd.concat(shortStoryCounts, axis=1, sort=False)
+
+# get document term Matrix
+dtm = df.T # transposes DataFrame
+                </code></pre></section>
+                <section><h2>TF-IDF</h2>
+                <p>Now we can calculate it ourselves</p>
+                <p>Anyone remember what this is?</p>
+                </section>
+                <section><h2>Document Lengths</h2>
+                <pre><code class="python">
+documentLengths = dtm.sum(axis=1)                    
+                </code></pre>
+                </section>
+                <section><h2>Word frequencies</h2><pre><code class='python' style='font-size: .95em;'>
+# Divide each word's number by doc length
+frequencyDtm = dtm.div(documentLengths, axis='index')  
+
+# Replace NaN values with 0 (otherwise the math won't work)
+frequencyDtm = frequencyDtm.fillna(0)
+                </code></pre></section>
+                <section><h2>How many docs contain a term?</h2>
+                <pre><code class="python">
+docsWithTerm = dtm.count()                    
+                </code></pre>
+                </section>
+                <section><h2>Get value used to weigh term</h2><pre><code class='python' style='font-size: .95em;'>
+termWeight = len(dtm)/docsWithTerm
+# often adjusted with log
+import math
+inverseDocumentFrequency = termWeight.apply(math.log)          
+                </code></pre>
+                </section>
+                <section><h2>Get TFIDF!</h2><pre><code class='python' style='font-size: .85em;'>
+tfidf = frequencyDtm.multiply(inverseDocumentFrequency)                    
+                </code></pre></section>
+                <section><h2>Get Terms for one story</h2><pre><code class='python'>
+bohemia = tfidf[0:1].squeeze()
+print(bohemia.sort_values(ascending=False))                    
+                </code></pre></section>
+                <section><h2>Faster tfidf</h2>
+                <pre><code class='python' style='font-size: .85em;'>
+from sklearn.feature_extraction.text import TfidfVectorizer                
+                </code></pre>
+                </section>
+                <section><h2>Tokenizer</h2><pre><code class='python' style='font-size: .85em;'>
+# Create a tokenizer function
+def tokenizeText(text):
+    words = nltk.word_tokenize(text)
+    filtered = [word for word in words if word.isalnum()]
+    return filtered
+
+# Create vectorizer object. 
+# use_idf=False uses plain frequencies
+countVectorizer = TfidfVectorizer(tokenizer=tokenizeText)                    
+                </code></pre></section>
+                <section><pre><code class='python' style='font-size: .85em;'>
+# Get the TFIDF scores
+countMatrix = countVectorizer.fit_transform(shortStories)
+# Get the vocabulary
+vocabulary = countVectorizer.get_feature_names()
+# Create a DataFrame to hold this information
+countArray = countMatrix.toarray()
+dtm = DataFrame(countArray, columns=vocabulary)
+# Get bohemai value
+bohemia = dtm[0:1].squeeze()
+print(bohemia.sort_values(ascending=False))
+                </code></pre></section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                transition:'fade',
+				transitionSpeed: 'fast',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

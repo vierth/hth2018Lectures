@@ -1,6 +1,8 @@
 # Hacking the Humanities Lecture Slides
 I will be uploading the lectures from my Hacking the Humanities class here. This way students and interested parties can access them easily.
 
+[October 29 Lecture](https://vierth.github.io/hth2018Lectures/Oct29)
+
 [October 15 Lecture](https://vierth.github.io/hth2018Lectures/Oct15)
 
 [October 8 Lecture](https://mskroon.github.io/hth_regex_081018.pdf) by Martin Kroon

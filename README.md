@@ -1,6 +1,10 @@
 # Hacking the Humanities Lecture Slides
 I will be uploading the lectures from my Hacking the Humanities class here. This way students and interested parties can access them easily.
 
+November 12 Lecture was given straight from the practice code in the hackingTutorial!
+
+[November 5 Lecture](https://vierth.github.io/hth2018Lectures/Nov5)
+
 [October 29 Lecture](https://vierth.github.io/hth2018Lectures/Oct29)
 
 [October 15 Lecture](https://vierth.github.io/hth2018Lectures/Oct15)

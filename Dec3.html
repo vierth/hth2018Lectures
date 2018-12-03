@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>December 3</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            .container{
+                display: flex;
+            }
+            .col{
+                flex: 1;
+            }
+            .command{
+                font-family: monospace;
+            }
+            .reveal pre {
+                font-size: 0.74em;
+                font-family: monospace;
+                line-height: 1.45em;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section><h1>Hacking the Humanities</h1>
+                <h2>December 3rd</h2>
+                </section>
+                
+                <section>
+                <h2>How to get info off the Internet</h2>
+                <h2>APIs and Web Scraping</h2>
+                </section>
+                <section><h2>What is an API?</h2></section>
+                <section><h2>Application Programming Interface</h2>
+                <p class="fragment">Just a way for your program to talk to other things</p></section>
+                <section><h2>These can be Python Modules</h2>
+                <p class="fragment">for a database (e.g. sqlite3)</p>
+                <p class="fragment">for a thread (e.g. _thread)</p>
+                <p class="fragment">for someones server/website (e.g. tweepy for Twitter)</p>
+                <p class="fragment">these are technically "wrappers"</p></section>
+                <section><h2>Or they can be RESTful APIs</h2>
+                <p>"Representational State Transfer"</p>
+                <p class="fragment">...but you don't need to remember that</p>
+                <p class="fragment">Just know that these are usually url based</p></section>
+                <section><h2>www.somewebsite.com/api/query=?thingtofind&api_key=42</h2></section>
+                <section><h2>APIs are built by others to allow access to information</h2>
+                <p class="fragment">Often require an API key, which controls access</p></section>
+                <section><h2>Webscraping gets information without an API</h2>
+                <p class="fragment">Don't scrape if there is an API!</p>
+                <p class="fragment">If there isn't an API, consider why there isn't.</p></section>
+                <section><h2>Webscraping and the robots.txt</h2>
+                <p class="fragment">This will tell you how the website expects bots to behave</p></section>
+                <section data-background-iframe="https://en.wikipedia.org/robots.txt" data-background-interactive data-background="white"></section>
+                <section><h2>Getting Data from Wikipedia</h2>
+                <p class="fragment">They have an API, but they also allow scraping</p></section>
+                <section><h2>Talking to the Internet</h2><code>import urllib.request</code></section>
+                <section><code style='font-size: .5em;'>url = "https://en.wikipedia.org/wiki/United_States_Attorney_for_the_Southern_District_of_New_York"</code></section>
+                <section><h2>Similar to a file object</h2>
+                    <code>request = urllib.request.urlopen(url)</code></section>
+                <section><h2>The request object neads to be read</h2>
+                    <code>contents = request.read()</code></section>
+                <section><h2>It also needs to be closed</h2><code>request.close()</code></section>
+                <section><h2>Let's print it!</h2><code>print(contents)</code></section>
+                <section><h2>24_web1_urllib1.py</h2></section>
+                <section><h2>Let's back up</h2>
+                <p><code>contents = request.read()</code></p>
+                <p><code>request.close()</code></p></section>
+                <section><p><code>contents</code></p>
+                <p>This is in bitcode</p>
+                <p class="fragment">to turn it into a string...</p>
+                <p class="fragment"><code>htmlstring = contents.decode()</code></p></section>
+                <section><pre><code class='python'>
+with open("wikiAttorneys.html", "w", encoding="utf8") as wf:
+    wf.write(htmlstring)                    
+                </code></pre>></section>
+                <section><h2>24_web1_urllib2.py</h2></section>
+                <section><h2>In a few minutes, we'll scape this file for information</h2>
+                <h2 class="fragment">but first!</h2></section>
+                <section><h2>Let's look at the Wikipedia API</h2>
+                <p>https://en.wikipedia.org/w/api.php?</p>
+                <p class="fragment">We will add to this to make an api call</p></section>
+                <section><table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Function
+                            </th>
+                            <th>
+                                Value
+                            </th>
+                        </tr>
+                    <tbody>
+                        <tr class="fragment">
+                            <td>
+                                action=
+                            </td>
+                            <td>
+                                tells api what to do
+                            </td>
+                            <td>
+                                opensearch (basic search)
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>
+                                format= 
+                            </td>
+                            <td>
+                                set return format
+                            </td>
+                            <td>
+                                json (xml is another option)
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>
+                                search=
+                            </td>
+                            <td>
+                                what to look for
+                            </td>
+                            <td>
+                                your search term
+                            </td>
+                        </tr>
+                    </tbody>
+                    </thead>
+                </table></section>
+                <section>
+                    <h2>Join parameters with "&"</h2>
+                    <p>action=opensearch&format=json&search=pandas</p>
+                </section>
+                <section>
+                    <h2>The full call</h2>
+                    <p>https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=pandas</p>
+                </section>
+                <section data-background-iframe="https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=pandas" data-background-interactive="" data-background="white"></section>
+                <section><h2>This is in json (JavaScript Object notation)</h2></section>
+                <section><h2>Calling from within Python</h2></section>
+                <section><h2>Header</h2><code>wikiHeader = {'User-Agent':'Paul', 'User-Email':'p.a.vierthaler@hum.leidenuniv.nl'}</code></section>
+                <section><h2>Adding the header</h2><code>wikiRequest = urllib.request.Request(apiCall, headers=wikiHeader)</code></section>
+                <section><h2>Making the request</h2><pre><code class="python">
+request = urllib.request.urlopen(wikiRequest)
+responseData = request.read().decode()
+request.close()
+print(responseData)                    
+                </code></pre></section>
+                <section><h2>24_web2_wikiapi.py</h2></section>
+                <section><h2>Parsing JSON</h2></section>
+                <section><code>import json</code></section>
+                <section><h2>Turn the result into python object</h2><code>wikiResults = json.loads(responseData)</code></section>
+                <section><pre><code class="python">
+for title, tagline, url in zip(wikiResults[1], wikiResults[2], wikiResults[3]):
+    print(f"Page Title: {title}, Tag: {tagline}, URL: {url}")                    
+                </code></pre></section>
+                <section><h2>24_web3_json.py</h2></section>
+                <section><h2>Wikipedia's API gives us much more than we can scrape</h2>
+                <p>Every api is different, so you have to check the documentation</p></section>
+                <section><h2>action=</h2>
+                <p>query</p></section>
+                <section><h2>prop=</h2>
+                <p class="fragment">links</p>
+                <p class="fragment">linkshere</p>
+                <p class="fragment">categories</p>
+                <p class="fragment">pageviews</p>
+                <p class="fragment">revisions</p></section>
+                <section><h2>titles=</h2><p>
+                    Retrieves the information for the given title or titles
+                </p></section>
+                <section><p>https://en.wikipedia.org/w/api.php?action=query&prop=linkshere&format=json&titles=Pandas_(software)</p></section>
+                <section><h2>24_web4_moreapi.py</h2></section>
+                <section><h2>Let's scrape something quickly</h2></section>
+                <section><h2>HTML parsers</h2></section>
+                <section><code>from bs4 import BeautifulSoup</code></section>
+                <section><h2>The soup object takes an html string and a parser</h2>
+                <p><code>soup = BeautifulSoup(rf.read(),"lxml")</code></p></section>
+                <section><h2>Find All Links</h2>
+                <p><code>links = soup.find_all("a")</code></p></section>
+                <section><h2>Get text</h2>
+                <code>links[0].string</code></section>
+                <section><h2>Get URL</h2>
+                <code>links[0].get('href')</code></section>
+                <section><h2>24_web5_soup.py</h2></section>
+                <section><h2>For next time:</h2>
+                <h2>Presentations!</h2>
+                <p>4-6 minutes</p>
+                <p>1-2 figures/visualizations</p>
+                <p>10 percent of your grade</p></section>
+                <section><h2>Final Assignment</h2>
+                <p>Due December 17</p>
+                <p>Submit a visualization (this can be one you used in your presentation</p>
+                <p>Provide the code that created it (extensively commented and including everything I need to run it!)</p>
+                <p>Write a 250-350 word essay explaining</p>
+                <p>Why did you make it?</p>
+                <p>What does it tell you?</p>
+                <p>How does it contribute to your project?</p>
+                <p>Does it need refinement? Why or why not?</p></section>
+                <section><h2>Thursday 18hr Practice session</h2>
+                <h2>Lipsius 030</h2></section>
+                <section><h2>Evaluations</h2></section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                transition:'fade',
+				transitionSpeed: 'fast',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
